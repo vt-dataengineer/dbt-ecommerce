@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: ecommerce
+    # database: raw_ecommerce
+    schema: raw_ecommerce
+    # meta:
+    #   external_location: "raw_ecommerce"
+    tables:
+      - name: customers
+      - name: products
+      - name: orders
+      - name: order_items
+      - name: payments

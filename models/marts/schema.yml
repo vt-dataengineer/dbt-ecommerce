@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "One row per order with payment and customer info"
+    columns:
+      - name: order_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: order_total
+        tests:
+          - not_null
+      - name: payment_status
+        tests:
+          - accepted_values:
+              values: ['paid', 'unpaid']
+
+  - name: dim_customers
+    description: "Customer dimension with lifetime value and segmentation"
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_segment
+        tests:
+          - accepted_values:
+              values: ['high value', 'mid value', 'low value']
+
+  - name: dim_products
+    description: "Product dimension with sales statistics"
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
