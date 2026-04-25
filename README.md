@@ -13,6 +13,7 @@ Models a real-world e-commerce scenario with full data quality testing and docum
 | dbt_expectations | Advanced data quality tests |
 
 ## Project Architecture
+![Lineage DAG](assets/lineage.PNG)
 
 ### Data Flow
 
@@ -118,5 +119,3 @@ dbt docs serve
 ## Setup
 Copy `profiles.yml.example` to `~/.dbt/profiles.yml` and update
 with your MySQL credentials.
-
-![Lineage DAG](assets/lineage.PNG)
