@@ -1,0 +1,67 @@
+name: DBT CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  dbt-ci:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root_password
+          MYSQL_DATABASE: dev_ecommerce
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install dbt-mysql
+
+      - name: Create raw schema and load data
+        run: |
+          mysql -h 127.0.0.1 -u root -proot_password < setup/init_raw_data.sql
+
+      - name: Create profiles.yml
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml << EOF
+          dbt_ecommerce:
+            target: dev
+            outputs:
+              dev:
+                type: mysql
+                server: 127.0.0.1
+                port: 3306
+                schema: dev_ecommerce
+                username: root
+                password: root_password
+          EOF
+
+      - name: Run dbt deps
+        run: dbt deps
+
+      - name: Run dbt models
+        run: dbt run
+
+      - name: Run dbt tests
+        run: dbt test
