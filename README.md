@@ -93,7 +93,7 @@ dbt_ecommerce/
 ## How to Run Locally
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/dbt-ecommerce.git
+git clone https://github.com/vt-dataengineer/dbt-ecommerce.git
 cd dbt-ecommerce
 
 # Create virtual environment
@@ -119,4 +119,4 @@ dbt docs serve
 Copy `profiles.yml.example` to `~/.dbt/profiles.yml` and update
 with your MySQL credentials.
 
-![Lineage DAG](assets/lineage.png)
+![Lineage DAG](assets/lineage.PNG)
