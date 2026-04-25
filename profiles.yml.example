@@ -1,0 +1,18 @@
+dbt_ecommerce:
+  target: dev
+  outputs:
+    dev:
+      type: mysql
+      server: localhost
+      port: 3306
+      schema: dev_ecommerce
+      username: YOUR_DB_USER
+      password: YOUR_DB_PASSWORD
+
+    prod:
+      type: mysql
+      server: localhost
+      port: 3306
+      schema: prod_ecommerce
+      username: YOUR_DB_USER
+      password: YOUR_DB_PASSWORD
