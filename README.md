@@ -58,6 +58,7 @@ Every pull request triggers:
 7. Fails the PR if any test breaks
 
 ## Project Structure
+```
 dbt_ecommerce/
     models/
         staging/
@@ -87,6 +88,7 @@ dbt_ecommerce/
     profiles.yml.example             # profiles template (safe to commit)
     .gitignore
     README.md
+```
 
 ## How to Run Locally
 ```bash
